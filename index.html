@@ -10,119 +10,319 @@
 			font-weight: bold;
 			font-family: Verdana;
 		}
-
-
+		.XSquare{
+			border:solid;
+			text-align: center;
+			font-size: 18pt;
+			font-weight: bold;
+			font-family: Verdana;
+		}
 	</style>
+	
 	<script>
-	function startGame(){
+		function startGame(){
 
-		for (var i = 1; i <= 9; i++) {
-			clearBox(i);
-		}
+			for (var i = 1; i <= 9; i++) {
+				for(var j = 1; j <=9; j++) {
+					clearBox(i,j);
+				}
+			}
 
-		document.turn = "X";
-		if(Math.random() < 0.5){
-			document.turn = "O";
-		}
-		document.winner = null;
-		setMessage(document.turn + " gets to start");
-
-	}
-	function setMessage(msg){
-		t=document.getElementById("message");
-		t.innerText = msg;
-
-	}
-
-	function nextMove(square){
-		if(document.winner != null){
-			setMessage(document.winner + " already won the game");
-		}
-		else if (square.innerText == "") {
-			square.innerText = document.turn;
-			switchTurn();	
-		} else{
-			setMessage("That cell is already used.");
-		}
-		
-	}
-
-	function switchTurn(){
-		if (checkWinner(document.turn)) {
-			setMessage("Congratulations "+ document.turn +"! you win");
-			document.winner = document.turn;
-		}
-		else if (document.turn == "X") {
-			document.turn = "O";
-			setMessage("It's "+ document.turn +"'s turn");	
-		}else{
 			document.turn = "X";
-			setMessage("It's "+ document.turn +"'s turn");
+			if(Math.random() < 0.5){
+				document.turn = "O";
+			}
+			document.winner = null;
+			document.nextBox = "a";
+			document.boxWinner = ["a","n","n","n","n","n","n","n","n","n"]
+			setMessage(document.turn + " gets to start");
 		}
-	}
 
-function checkWinner(move){
-	var result =false;
-	if(checkRow(1,2,3,move) || checkRow(4,5,6,move) || checkRow(7,8,9,move) || checkRow(1,4,7,move) ||checkRow(2,5,8,move) ||checkRow(3,6,9,move) || checkRow(1,5,9,move) || checkRow(3,5,7,move)){
-		result = true;
-	}
-	return result;
-}
-
-	function checkRow(a,b,c,move){
-		var result = false;
-		if (getBox(a) == move && getBox(b) == move && getBox(c) == move) {
-			result = true;
+		function nextMove(square){
+			if(document.winner != null){
+				setMessage(document.winner + " already won the game");
+			}
+			else if (validateMove(square)) {
+				square.innerText = document.turn;
+				switchTurn();	
+			} else {
+				setMessage("Not a valid move");
+			}
 		}
-		return result;
-	}
-	function getBox(number){
-		return document.getElementById("s"+ number).innerText;
-	}
+	
+		function validateMove(square) {
+			if(document.boxWinner[parseInt(square.id[1])].localeCompare("n") != 0 ) {
+				return false;	// Because the box is already won by someone
+			}
+			if(document.nextBox == "a") {
+				if(document.boxWinner[parseInt(square.id[2])].localeCompare("n") == 0 ) {
+					document.nextBox = square.id[2];
+				} else {
+					document.nextBox = "a";
+				}
+				return true;
+			} else if(square.id[1] == document.nextBox) {
+				if(document.boxWinner[parseInt(square.id[2])].localeCompare("n") == 0 ) {
+					document.nextBox = square.id[2];
+				} else {
+					document.nextBox = "a";
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
 
-	function clearBox(number){
-		document.getElementById("s"+ number).innerText = "";
-	}
+		function switchTurn(){
+			if (checkWinner(document.turn)) {
+				setMessage("Congratulations "+ document.turn +"! you win");
+				document.winner = document.turn;
+			}
+			else if (document.turn == "X") {
+				document.turn = "O";
+				setMessage("It's "+ document.turn +"'s turn");	
+			}else{
+				document.turn = "X";
+				setMessage("It's "+ document.turn +"'s turn");
+			}
+		}
+
+		function checkWinner(move){
+			for(var i = 1; i <= 9; i++) {
+				var result =false;
+				if(checkRow(i,1,2,3,move) || checkRow(i,4,5,6,move) || checkRow(i,7,8,9,move) || checkRow(i,1,4,7,move) ||checkRow(i,2,5,8,move) ||checkRow(i,3,6,9,move) || checkRow(i,1,5,9,move) || checkRow(i,3,5,7,move)){
+					result = true;
+				}
+				if(result) {
+					document.boxWinner[i] = document.turn;
+				}
+			}
+			var final_result =false;
+			if(checkFinalRow(1,2,3,move) || checkFinalRow(4,5,6,move) || checkFinalRow(7,8,9,move) || checkFinalRow(1,4,7,move) ||checkFinalRow(2,5,8,move) ||checkFinalRow(3,6,9,move) || checkFinalRow(1,5,9,move) || checkFinalRow(3,5,7,move)){
+				final_result = true;
+			}
+			return final_result;
+		}
+	
+		function checkRow(i,a,b,c,move){
+			var result = false;
+			if (getBox(i,a) == move && getBox(i,b) == move && getBox(i,c) == move) {
+				result = true;
+			}
+			return result;
+		}
+
+		function checkFinalRow(a,b,c,move){
+			var result = false;
+			if(document.boxWinner[a] == move && document.boxWinner[b] == move && document.boxWinner[c] == move) {
+				result = true;
+			}
+			return result;
+		}
+
+		function getBox(number1, number2){
+			return document.getElementById("s" + number1 + number2).innerText;
+		}
+	
+		function setMessage(msg){
+			t=document.getElementById("message");
+			t.innerText = msg;
+
+		}
+
+		function clearBox(number1, number2){
+			document.getElementById("s" + number1 + number2).innerText = "";
+		}
 
 	</script>
-
 </head>
 
 <body onLoad="startGame();">
-	<h1>Tic-Tac-Toe</h1>
-	<div id="message"></div>
 
-<table border=1px;>
+<h1>Tic-Tac-Toe</h1>
+<div id="message"></div>
+
+<table border=3px;>
 	<tr>
-		<td id="s1" class = "Square" onClick = "nextMove(this);"></td>
-		<td id="s2" class = "Square" onClick = "nextMove(this);"></td>
-		<td id="s3" class = "Square" onClick = "nextMove(this);"></td>
+		<td class = "XSquare">
+			<table border=1px;>
+				<tr>
+					<td id="s11" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s12" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s13" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s14" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s15" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s16" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s17"class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s18" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s19" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+			</table>
+		</td>
+		<td class = "XSquare">
+			<table border=1px;>
+				<tr>
+					<td id="s21" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s22" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s23" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s24" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s25" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s26" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s27"class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s28" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s29" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+			</table>
+		</td>
+		<td class = "XSquare">
+			<table border=1px;>
+				<tr>
+					<td id="s31" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s32" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s33" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s34" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s35" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s36" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s37"class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s38" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s39" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+			</table>
+		</td>
 	</tr>
 	<tr>
-		<td id="s4" class = "Square" onClick = "nextMove(this);"></td>
-		<td id="s5" class = "Square" onClick = "nextMove(this);"></td>
-		<td id="s6" class = "Square" onClick = "nextMove(this);"></td>
+		<td class = "XSquare">
+			<table border=1px;>
+				<tr>
+					<td id="s41" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s42" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s43" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s44" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s45" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s46" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s47"class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s48" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s49" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+			</table>
+		</td>
+		<td class = "XSquare">
+			<table border=1px;>
+				<tr>
+					<td id="s51" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s52" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s53" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s54" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s55" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s56" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s57"class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s58" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s59" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+			</table>
+		</td>
+		<td class = "XSquare">
+			<table border=1px;>
+				<tr>
+					<td id="s61" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s62" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s63" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s64" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s65" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s66" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s67"class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s68" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s69" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+			</table>
+		</td>
 	</tr>
 	<tr>
-		<td id="s7"class = "Square" onClick = "nextMove(this);"></td>
-		<td id="s8" class = "Square" onClick = "nextMove(this);"></td>
-		<td id="s9" class = "Square" onClick = "nextMove(this);"></td>
+		<td class = "XSquare">
+			<table border=1px;>
+				<tr>
+					<td id="s71" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s72" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s73" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s74" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s75" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s76" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s77"class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s78" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s79" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+			</table>
+		</td>
+		<td class = "XSquare">
+			<table border=1px;>
+				<tr>
+					<td id="s81" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s82" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s83" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s84" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s85" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s86" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s87"class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s88" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s89" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+			</table>
+		</td>
+		<td class = "XSquare">
+			<table border=1px;>
+				<tr>
+					<td id="s91" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s92" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s93" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s94" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s95" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s96" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+				<tr>
+					<td id="s97"class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s98" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="s99" class = "Square" onClick = "nextMove(this);"></td>
+				</tr>
+			</table>
+		</td>
 	</tr>
-
-
-
-
-
 </table>
 
 <a href="javascript:startGame();">Restart</a>
-
-
-
 </body>
-
-
-
-
 
 </html>
