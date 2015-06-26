@@ -134,6 +134,11 @@
 				document.turn = "X";
 				setMessage("It's "+ document.turn +"'s turn");
 			}
+			
+			/* Checking for if the next box is equal to an already won box */
+			if( document.nextBox != "a" && document.boxWinner[ parseInt(document.nextBox) ].localeCompare("n") != 0 ) {
+				document.nextBox = "a";
+			}
 		}
 
 		function checkWinner(move){
