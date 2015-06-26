@@ -19,11 +19,39 @@
 		}
 	
 		.winnerX{
+			border:solid;
+			text-align: center;
+			font-size: 18pt;
+			font-weight: bold;
+			font-family: Verdana;
 			border-color: #66ff66;
 		}
 
 		.winnerO{
+			border:solid;
+			text-align: center;
+			font-size: 18pt;
+			font-weight: bold;
+			font-family: Verdana;
 			border-color: #6666ff;
+		}
+	
+		.nextCell{
+			border:solid;
+			text-align: center;
+			font-size: 18pt;
+			font-weight: bold;
+			font-family: Verdana;
+			border-color: #eeeeee;
+		}
+
+		.notNextCell{
+			border:solid;
+			text-align: center;
+			font-size: 18pt;
+			font-weight: bold;
+			font-family: Verdana;
+			border-color: #000000;
 		}
 
 	</style>
@@ -53,7 +81,16 @@
 			}
 			else if (validateMove(square)) {
 				square.innerText = document.turn;
-				switchTurn();	
+				switchTurn();
+				for(var i = 1; i<=9; i++) {
+					if(document.boxWinner[i].localeCompare("n") == 0) {
+						if(document.nextBox.localeCompare("a") == 0 || document.nextBox.localeCompare(i) == 0){
+							document.getElementById("a"+i).className = (" nextCell");
+						} else {
+							document.getElementById("a"+i).className = (" notNextCell");
+						}
+					}
+				}
 			} else {
 				setMessage("Not a valid move");
 			}
@@ -107,7 +144,7 @@
 				}
 				if(result) {
 					document.boxWinner[i] = document.turn;
-					document.getElementById("a"+i).className += (" winner"+move );
+					document.getElementById("a"+i).className = (" winner"+move );
 				}
 			}
 			var final_result =false;
@@ -154,183 +191,198 @@
 
 <h1>Tic-Tac-Toe</h1>
 <div id="message"></div>
-
-<table border=3px;>
+<table>
 	<tr>
-		<td id="a1" class = "XSquare">
-			<table border=1px;>
+		<td>
+			<table border=3px;>
 				<tr>
-					<td id="s11" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s12" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s13" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="a1" class = "XSquare">
+						<table border=1px;>
+							<tr>
+								<td id="s11" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s12" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s13" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s14" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s15" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s16" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s17" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s18" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s19" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+						</table>
+					</td>
+					<td id="a2" class = "XSquare">
+						<table border=1px;>
+							<tr>
+								<td id="s21" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s22" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s23" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s24" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s25" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s26" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s27" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s28" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s29" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+						</table>
+					</td>
+					<td id="a3" class = "XSquare">
+						<table border=1px;>
+							<tr>
+								<td id="s31" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s32" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s33" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s34" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s35" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s36" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s37" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s38" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s39" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
-					<td id="s14" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s15" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s16" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="a4" class = "XSquare">
+						<table border=1px;>
+							<tr>
+								<td id="s41" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s42" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s43" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s44" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s45" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s46" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s47" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s48" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s49" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+						</table>
+					</td>
+					<td id="a5" class = "XSquare">
+						<table border=1px;>
+							<tr>
+								<td id="s51" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s52" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s53" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s54" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s55" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s56" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s57" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s58" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s59" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+						</table>
+					</td>
+					<td id="a6" class = "XSquare">
+						<table border=1px;>
+							<tr>
+								<td id="s61" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s62" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s63" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s64" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s65" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s66" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s67" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s68" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s69" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
-					<td id="s17"class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s18" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s19" class = "Square" onClick = "nextMove(this);"></td>
+					<td id="a7" class = "XSquare">
+						<table border=1px;>
+							<tr>
+								<td id="s71" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s72" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s73" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s74" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s75" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s76" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s77" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s78" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s79" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+						</table>
+					</td>
+					<td id="a8" class = "XSquare">
+						<table border=1px;>
+							<tr>
+								<td id="s81" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s82" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s83" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s84" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s85" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s86" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s87" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s88" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s89" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+						</table>
+					</td>
+					<td id="a9" class = "XSquare">
+						<table border=1px;>
+							<tr>
+								<td id="s91" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s92" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s93" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s94" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s95" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s96" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+							<tr>
+								<td id="s97" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s98" class = "Square" onClick = "nextMove(this);"></td>
+								<td id="s99" class = "Square" onClick = "nextMove(this);"></td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 			</table>
 		</td>
-		<td id="a2" class = "XSquare">
-			<table border=1px;>
-				<tr>
-					<td id="s21" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s22" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s23" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s24" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s25" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s26" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s27"class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s28" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s29" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-			</table>
-		</td>
-		<td id="a3" class = "XSquare">
-			<table border=1px;>
-				<tr>
-					<td id="s31" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s32" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s33" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s34" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s35" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s36" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s37"class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s38" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s39" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td id="a4" class = "XSquare">
-			<table border=1px;>
-				<tr>
-					<td id="s41" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s42" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s43" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s44" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s45" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s46" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s47"class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s48" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s49" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-			</table>
-		</td>
-		<td id="a5" class = "XSquare">
-			<table border=1px;>
-				<tr>
-					<td id="s51" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s52" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s53" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s54" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s55" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s56" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s57"class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s58" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s59" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-			</table>
-		</td>
-		<td id="a6" class = "XSquare">
-			<table border=1px;>
-				<tr>
-					<td id="s61" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s62" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s63" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s64" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s65" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s66" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s67"class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s68" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s69" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td id="a7" class = "XSquare">
-			<table border=1px;>
-				<tr>
-					<td id="s71" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s72" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s73" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s74" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s75" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s76" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s77"class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s78" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s79" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-			</table>
-		</td>
-		<td id="a8" class = "XSquare">
-			<table border=1px;>
-				<tr>
-					<td id="s81" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s82" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s83" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s84" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s85" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s86" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s87"class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s88" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s89" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-			</table>
-		</td>
-		<td id="a9" class = "XSquare">
-			<table border=1px;>
-				<tr>
-					<td id="s91" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s92" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s93" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s94" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s95" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s96" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-				<tr>
-					<td id="s97"class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s98" class = "Square" onClick = "nextMove(this);"></td>
-					<td id="s99" class = "Square" onClick = "nextMove(this);"></td>
-				</tr>
-			</table>
+		<td width="100px"></td>
+		<td>
+			<h2>Color Legend</h2>
+			<p>
+				<a style="color:#66ff66">Green</a>: Box won by X<br/>
+				<a style="color:#6666ff">Blue</a>: Box won by 0<br/>
+				<a style="color:#eeeeee">White</a>: Box where the next move can be placed<br/>
+				Black: All other boxes<br/>
+			</p>
 		</td>
 	</tr>
 </table>
