@@ -51,6 +51,9 @@
 		}
 	
 		function validateMove(square) {
+			if(square.innerText.localeCompare("") != 0){
+				return false;
+			}
 			if(document.boxWinner[parseInt(square.id[1])].localeCompare("n") != 0 ) {
 				return false;	// Because the box is already won by someone
 			}
