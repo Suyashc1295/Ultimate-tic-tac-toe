@@ -17,6 +17,15 @@
 			font-weight: bold;
 			font-family: Verdana;
 		}
+	
+		.winnerX{
+			border-color: #66ff66;
+		}
+
+		.winnerO{
+			border-color: #6666ff;
+		}
+
 	</style>
 	
 	<script>
@@ -98,6 +107,7 @@
 				}
 				if(result) {
 					document.boxWinner[i] = document.turn;
+					document.getElementById("a"+i).className += (" winner"+move );
 				}
 			}
 			var final_result =false;
@@ -147,7 +157,7 @@
 
 <table border=3px;>
 	<tr>
-		<td class = "XSquare">
+		<td id="a1" class = "XSquare">
 			<table border=1px;>
 				<tr>
 					<td id="s11" class = "Square" onClick = "nextMove(this);"></td>
@@ -166,7 +176,7 @@
 				</tr>
 			</table>
 		</td>
-		<td class = "XSquare">
+		<td id="a2" class = "XSquare">
 			<table border=1px;>
 				<tr>
 					<td id="s21" class = "Square" onClick = "nextMove(this);"></td>
@@ -185,7 +195,7 @@
 				</tr>
 			</table>
 		</td>
-		<td class = "XSquare">
+		<td id="a3" class = "XSquare">
 			<table border=1px;>
 				<tr>
 					<td id="s31" class = "Square" onClick = "nextMove(this);"></td>
@@ -206,7 +216,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class = "XSquare">
+		<td id="a4" class = "XSquare">
 			<table border=1px;>
 				<tr>
 					<td id="s41" class = "Square" onClick = "nextMove(this);"></td>
@@ -225,7 +235,7 @@
 				</tr>
 			</table>
 		</td>
-		<td class = "XSquare">
+		<td id="a5" class = "XSquare">
 			<table border=1px;>
 				<tr>
 					<td id="s51" class = "Square" onClick = "nextMove(this);"></td>
@@ -244,7 +254,7 @@
 				</tr>
 			</table>
 		</td>
-		<td class = "XSquare">
+		<td id="a6" class = "XSquare">
 			<table border=1px;>
 				<tr>
 					<td id="s61" class = "Square" onClick = "nextMove(this);"></td>
@@ -265,7 +275,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class = "XSquare">
+		<td id="a7" class = "XSquare">
 			<table border=1px;>
 				<tr>
 					<td id="s71" class = "Square" onClick = "nextMove(this);"></td>
@@ -284,7 +294,7 @@
 				</tr>
 			</table>
 		</td>
-		<td class = "XSquare">
+		<td id="a8" class = "XSquare">
 			<table border=1px;>
 				<tr>
 					<td id="s81" class = "Square" onClick = "nextMove(this);"></td>
@@ -303,7 +313,7 @@
 				</tr>
 			</table>
 		</td>
-		<td class = "XSquare">
+		<td id="a9" class = "XSquare">
 			<table border=1px;>
 				<tr>
 					<td id="s91" class = "Square" onClick = "nextMove(this);"></td>
